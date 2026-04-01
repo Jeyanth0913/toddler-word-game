@@ -140,3 +140,31 @@ html {
         font-size: 30px; /* Better fit for phone screens */
     }
 }
+
+.star-display {
+    font-size: 40px;
+    margin-bottom: 10px;
+    min-height: 50px; /* Keeps layout steady even with 0 stars */
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.star-pop {
+    animation: starGrow 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes starGrow {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Make the trophy star extra special */
+.trophy-animation {
+    animation: trophyBounce 1s infinite;
+}
+
+@keyframes trophyBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}

@@ -15,7 +15,9 @@ for (let suffix in wordFamilies) { words.push(...wordFamilies[suffix]); }
 let currentIndex = 0;
 const colors = ["#FF5757", "#5271FF", "#00C2CB", "#FF914D", "#7ED957", "#8C52FF"];
 
-// THIS FUNCTION IS REQUIRED FOR THE OVERLAY
+let starsEarned = 0;
+let completedFamilies = []; // This will store ["AR", "AP", etc.]
+
 function startApp() {
     document.getElementById('start-overlay').style.display = 'none';
     updateDisplay();
@@ -28,21 +30,22 @@ function updateDisplay() {
     
     wordElement.innerHTML = "";
     wordElement.classList.remove("wiggle");
-    void wordElement.offsetWidth; 
+    void wordElement.offsetWidth; // Trigger reflow
 
+    // Build interactive letters
     for (let char of currentWord) {
         const span = document.createElement("span");
         span.innerText = char;
         span.style.textDecoration = "none";
         span.onclick = (e) => {
             e.stopPropagation();
-            const utter = new SpeechSynthesisUtterance(char.toLowerCase()); // ADD .toLowerCase()
+            const utter = new SpeechSynthesisUtterance(char.toLowerCase());
             utter.lang = 'en-US';
             window.speechSynthesis.speak(utter);
         };
         wordElement.appendChild(span);
     }
-    
+
     const familySuffix = currentWord.substring(1);
     const colorIndex = Object.keys(wordFamilies).indexOf(familySuffix) % colors.length;
     wordElement.style.color = colors[colorIndex];
@@ -52,36 +55,34 @@ function updateDisplay() {
     setTimeout(speakWord, 200);
 }
 
-// In updateDisplay, change the span.onclick:
-span.onclick = (e) => {
-    e.stopPropagation();
-    const utter = new SpeechSynthesisUtterance(char.toLowerCase()); // ADD .toLowerCase()
-    utter.lang = 'en-US';
-    window.speechSynthesis.speak(utter);
-};
-
-// In speakWord, update the loop and the full word:
 function speakWord() {
     const word = words[currentIndex];
     window.speechSynthesis.cancel();
 
-    // 1. Spell letters (Lowercasing prevents "Capital...")
     for (let char of word) {
         const utter = new SpeechSynthesisUtterance(char.toLowerCase()); 
-        utter.rate = 0.9; // Slightly slower as you requested
+        utter.rate = 0.9; 
         utter.lang = 'en-US';
         window.speechSynthesis.speak(utter);
     }
 
-    // 2. Pronounce full word
     const fullUtter = new SpeechSynthesisUtterance(word.toLowerCase());
-    fullUtter.rate = 0.7; // Slower for clarity
+    fullUtter.rate = 0.7; 
     fullUtter.lang = 'en-US';
     window.speechSynthesis.speak(fullUtter);
 }
 
 function nextWord() {
+    const currentFamily = words[currentIndex].substring(1);
     currentIndex = (currentIndex + 1) % words.length;
+    const newFamily = words[currentIndex].substring(1);
+    
+    // Only add a star if the family changed AND she hasn't finished it yet
+    if (currentFamily !== newFamily && !completedFamilies.includes(currentFamily)) {
+        completedFamilies.push(currentFamily); // Mark this family as "Done"
+        addStar();
+    }
+
     updateDisplay();
     startCelebration();
 }
@@ -89,6 +90,25 @@ function nextWord() {
 function prevWord() {
     currentIndex = (currentIndex - 1 + words.length) % words.length;
     updateDisplay();
+}
+
+function addStar() {
+    starsEarned++;
+    const container = document.getElementById("star-container");
+    const star = document.createElement("span");
+    star.innerHTML = "⭐";
+    star.className = "star-pop";
+    
+    if (starsEarned % 5 === 0) {
+        star.innerHTML = "🏆";
+        star.classList.add("trophy-animation");
+    }
+    
+    container.appendChild(star);
+    
+    const praise = new SpeechSynthesisUtterance("You earned a star! Great job!");
+    praise.rate = 0.9;
+    window.speechSynthesis.speak(praise);
 }
 
 function startCelebration() {
@@ -103,12 +123,8 @@ function startCelebration() {
     }
 }
 
-// Keyboard Listeners
 document.addEventListener('keydown', (e) => {
     if (e.key === "ArrowRight") nextWord();
     if (e.key === "ArrowLeft") prevWord();
     if (e.key === " ") speakWord();
 });
-
-// DO NOT call updateDisplay on window.onload. 
-// The startApp() function will handle it after the user taps.
