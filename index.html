@@ -3,43 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Siya's Word Game</title>
+    <title>Siya's Learning Apps</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 90%;
+            max-width: 400px;
+        }
+        .menu-btn {
+            height: 150px;
+            font-size: 35px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 0 rgba(0,0,0,0.1);
+            transition: transform 0.1s;
+        }
+        .menu-btn:active { transform: translateY(5px); box-shadow: 0 5px 0 rgba(0,0,0,0.1); }
+        .word-btn { background-color: #8c52ff; } /* Purple */
+        .math-btn { background-color: #ff914d; } /* Orange */
+        .btn-subtext { font-size: 18px; opacity: 0.9; margin-top: 10px; }
+    </style>
 </head>
 <body>
 
-    <div id="start-overlay" onclick="startApp()">
-        <div class="start-content">
-            <h1>Ready to Play?</h1>
-            <p>TAP TO START! 🎮</p>
-        </div>
-    </div>
-
     <div class="app-container">
+        <h1 style="color: #64748b; margin-bottom: 40px;">Hi Siya! 👋</h1>
         
-        <div id="star-container" class="star-display">
-            </div>
+        <div class="menu-container">
+            <button class="menu-btn word-btn" onclick="location.href='word.html'">
+                <span>🔤 ABC Words</span>
+                <span class="btn-subtext">Reading Practice</span>
+            </button>
 
-        <div id="word-family-indicator" class="family-label">-AR</div>
-
-        <div class="card" onclick="speakWord()">
-            <div id="word-text" class="word-letters">
-                </div>
-            <p class="tap-hint">Tap letters for sounds, Card for word!</p>
-        </div>
-
-        <div class="controls">
-            <button class="nav-btn prev" onclick="prevWord()" aria-label="Previous Word">⟵</button>
-            <button class="nav-btn repeat" onclick="speakWord()" aria-label="Repeat Word">🔊 Repeat</button>
-            <button class="nav-btn next" onclick="nextWord()" aria-label="Next Word">➔</button>
-        </div>
-        
-        <div class="footer-hint">
-            Keyboard: <b>Left / Right / Space</b>
+            <button class="menu-btn math-btn" onclick="location.href='math.html'">
+                <span>🔢 123 Math</span>
+                <span class="btn-subtext">Addition Practice</span>
+            </button>
         </div>
     </div>
-
-    <script src="script.js"></script>
 
 </body>
 </html>
