@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 Letter Word Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="start-overlay" onclick="startApp()">TAP TO PLAY! 🎮</div>
+
+    <div class="app-container">
+        <div id="word-family-indicator" class="family-label">-AR</div>
+
+        <div class="card" onclick="speakWord()">
+            <div id="word-text" class="word-letters"></div>
+            <p class="tap-hint">Tap letters for sounds, Card for word!</p>
+        </div>
+
+        <div class="controls">
+            <button class="nav-btn" style="background-color: #0ea5e9;" onclick="prevWord()">⟵</button>
+            <button class="nav-btn" style="background-color: #f59e0b;" onclick="speakWord()">🔊 Repeat</button>
+            <button class="nav-btn" style="background-color: #0ea5e9;" onclick="nextWord()">➔</button>
+        </div>
+        
+        <div class="footer-hint">Keyboard: <b>Left / Right / Space</b></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
