@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<a href="index.html" class="home-nav">🏠</a>
+    <a href="index.html" class="home-nav">🏠</a>
 
     <div id="start-overlay" onclick="startApp()">
         <div class="start-content">
@@ -17,32 +17,27 @@
     </div>
 
     <div class="app-container">
-        
-        <div id="star-container" class="star-display">
+        <div id="star-container" class="star-display"></div>
+
+        <div class="card">
+            <div id="word-slots" class="word-slots-container">
+                <div class="slot" id="slot-0">_</div>
+                <div class="slot" id="slot-1">_</div>
+                <div class="slot" id="slot-2">_</div>
             </div>
-
-        <div id="word-family-indicator" class="family-label">-AR</div>
-
-        <div class="card" onclick="speakWord()">
-            <div id="word-text" class="word-letters">
-                </div>
-            <p class="tap-hint">Tap letters for sounds, Card for word!</p>
+            
+            <div id="letter-bank" class="letter-bank"></div>
+            <div id="feedback-icon" class="feedback-box"></div>
+            <p class="tap-hint">Tap letters to build the word!</p>
         </div>
 
         <div class="controls">
-            <button class="nav-btn prev" onclick="prevWord()" aria-label="Previous Word">⟵</button>
-            <button class="nav-btn repeat" onclick="speakWord()" aria-label="Repeat Word">🔊 Repeat</button>
-            <button class="nav-btn next" onclick="nextWord()" aria-label="Next Word">➔</button>
-        </div>
-        
-        <div class="footer-hint">
-            Keyboard: <b>Left / Right / Space</b>
+            <button class="nav-btn prev" onclick="prevWord()">⟵</button>
+            <button class="nav-btn repeat" onclick="speakWord()">🔊 Repeat</button>
+            <button class="nav-btn next" onclick="nextWord()">➔</button>
         </div>
     </div>
 
     <script src="word.js"></script>
-
 </body>
 </html>
-
-<a href="index.html" style="margin-top: 20px; color: #94a3b8; text-decoration: none;">🏠 Back to Menu</a>

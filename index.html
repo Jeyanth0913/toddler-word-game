@@ -6,17 +6,19 @@
     <title>Siya's Learning Apps</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Menu Specific Styles */
         .menu-container {
             display: flex;
             flex-direction: column;
-            gap: 25px;
-            width: 90%;
-            max-width: 400px;
+            gap: 20px;
+            width: 100%;
+            max-width: 350px;
+            margin-top: 20px;
         }
         .menu-btn {
-            height: 150px;
-            font-size: 35px;
-            border-radius: 30px;
+            height: 120px;
+            font-size: 28px;
+            border-radius: 25px;
             border: none;
             cursor: pointer;
             color: white;
@@ -24,29 +26,42 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 10px 0 rgba(0,0,0,0.1);
+            box-shadow: 0 8px 0 rgba(0,0,0,0.1);
             transition: transform 0.1s;
         }
-        .menu-btn:active { transform: translateY(5px); box-shadow: 0 5px 0 rgba(0,0,0,0.1); }
-        .word-btn { background-color: #8c52ff; } /* Purple */
-        .math-btn { background-color: #ff914d; } /* Orange */
-        .btn-subtext { font-size: 18px; opacity: 0.9; margin-top: 10px; }
+        .menu-btn:active { transform: translateY(4px); box-shadow: 0 4px 0 rgba(0,0,0,0.1); }
+        .word-btn { background-color: #8c52ff; }
+        .math-btn { background-color: #ff914d; }
+        .btn-subtext { font-size: 16px; opacity: 0.9; margin-top: 5px; }
+
+        /* Photo Styles */
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 6px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <h1 style="color: #64748b; margin-bottom: 40px;">Hi Siya! 👋</h1>
+        <img src="siya.jpg" alt="Siya" class="profile-photo">
+
+        <h1 style="color: #64748b; margin: 10px 0;">Hi Siya! 👋</h1>
         
         <div class="menu-container">
             <button class="menu-btn word-btn" onclick="location.href='word.html'">
                 <span>🔤 ABC Words</span>
-                <span class="btn-subtext">Reading Practice</span>
+                <span class="btn-subtext">Reading Game</span>
             </button>
 
             <button class="menu-btn math-btn" onclick="location.href='math.html'">
                 <span>🔢 123 Math</span>
-                <span class="btn-subtext">Addition Practice</span>
+                <span class="btn-subtext">Addition Game</span>
             </button>
         </div>
     </div>
