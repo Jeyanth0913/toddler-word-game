@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Siya's Puzzle Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="index.html" class="home-nav">🏠</a>
+
+    <div id="start-overlay" onclick="startPuzzle()">
+        <div class="start-content">
+            <h1>Odd One Out!</h1>
+            <p>Find the one that's different! 🔍</p>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <div id="star-container" class="star-display"></div>
+        
+        <div class="card">
+            <h2 style="color: #64748b; margin-bottom: 20px;">Which one is different?</h2>
+            <div id="puzzle-grid" class="letter-bank" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                </div>
+            <div id="feedback-icon" class="feedback-box" style="font-size: 50px; margin-top: 20px;"></div>
+        </div>
+
+        <div class="controls">
+			<button class="nav-btn prev" onclick="generatePuzzle()">⟵</button>
+			<button class="nav-btn next" onclick="generatePuzzle()" style="width: 200px;">➔ Next</button>
+		</div>
+    </div>
+
+    <script src="puzzle.js"></script>
+</body>
+</html>
