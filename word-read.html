@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Siya's Reading Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="index.html" class="home-nav">🏠</a>
+
+    <div id="start-overlay" onclick="startApp()">
+        <div class="start-content">
+            <h1>Ready to Read?</h1>
+            <p>TAP TO START! 📖</p>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <div id="star-container" class="star-display"></div>
+        <div id="word-family-indicator" class="family-label">-AR</div>
+
+        <div class="card" onclick="speakWord()">
+            <div id="word-text" class="word-letters"></div>
+            <p class="tap-hint">Tap letters for sounds, Card for word!</p>
+        </div>
+
+        <div class="controls">
+            <button class="nav-btn prev" onclick="prevWord()">⟵</button>
+            <button class="nav-btn repeat" onclick="speakWord()">🔊 Repeat</button>
+            <button class="nav-btn next" onclick="nextWord()">➔</button>
+        </div>
+    </div>
+
+    <script src="word-read.js"></script>
+</body>
+</html>
