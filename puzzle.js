@@ -1,13 +1,55 @@
 const puzzleSets = [
-    { name: "Animals", items: ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🦁"], odd: "🍎" },
-    { name: "Fruit", items: ["🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍓", "🫐", "🍍"], odd: "🚗" },
-    { name: "Vehicles", items: ["🚗", "🚕", "🚙", "🚌", "🚑", "🚒", "🚜", "🚲", "✈️"], odd: "🦒" },
-    { name: "Weather", items: ["☀️", "☁️", "🌧️", "❄️", "⚡", "🌙", "🌈"], odd: "🍔" },
-    { name: "Dessert", items: ["🍦", "🍩", "🍪", "🎂", "🧁", "🥧", "🍫"], odd: "👟" },
-    { name: "Clothes", items: ["👕", "👗", "👖", "🧤", "🧣", "👒", "👟"], odd: "🎸" },
-    { name: "Music", items: ["🎸", "🎻", "🎹", "🎺", "🥁", "🪕"], odd: "🍉" }
+    { 
+        name: "Animals", 
+        items: ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🦁"], 
+        oddOptions: ["🍎", "🚗", "🍦", "⚽", "🎸"] 
+    },
+    { 
+        name: "Birds", 
+        items: ["🦆", "🦜", "🦉", "🐦", "🐧", "🦅", "🦢", "🦩", "🦃"], 
+        oddOptions: ["🚜", "⏰", "🍕", "🚲", "🧸"] 
+    },
+    { 
+        name: "Shapes", 
+        items: ["🔺", "🟡", "🟦", "⭐", "💎", "⬛", "🟢", "⬡", "💠"], 
+        oddOptions: ["🐱", "🍎", "🚀", "🍦", "🦒"] 
+    },
+    { 
+        name: "Balls", 
+        items: ["⚽", "🏀", "🏈", "⚾", "🎾", "🏐", "🏉", "🎱", "🏓"], 
+        oddOptions: ["🍌", "🥦", "🚁", "🦋", "🍩"] 
+    },
+    { 
+        name: "Sea Life", 
+        items: ["🐙", "🦑", "🦐", "🦞", "🦀", "🐡", "🐠", "🐬", "🐳", "🦈"], 
+        oddOptions: ["🚁", "🚜", "🚲", "🏠", "🌵"] 
+    },
+    { 
+        name: "Weather", 
+        items: ["☀️", "☁️", "🌧️", "❄️", "⚡", "🌙", "🌈", "🌪️", "🌡️"], 
+        oddOptions: ["🍔", "🍟", "🧸", "👟", "🎸"] 
+    },
+    { 
+        name: "Music", 
+        items: ["🎸", "🎻", "🎹", "🎺", "🥁", "🪕", "🎷", "🪗", "📻"], 
+        oddOptions: ["🍉", "🥕", "🚲", "🐶", "🧥"] 
+    },
+    { 
+        name: "Food", 
+        items: ["🍕", "🍔", "🍟", "🌭", "🥪", "🌮", "🥗", "🥘", "🍝"], 
+        oddOptions: ["👟", "🪥", "🚁", "🐧", "⭐"] 
+    },
+    { 
+        name: "Fruit", 
+        items: ["🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍓", "🫐", "🍍"], 
+        oddOptions: ["🚒", "🚢", "🧤", "🎸", "🦓"] 
+    },
+    { 
+        name: "Vehicles", 
+        items: ["🚗", "🚕", "🚙", "🚌", "🚑", "🚒", "🚜", "🚲", "✈️"], 
+        oddOptions: ["🦉", "🥥", "🧁", "🌷", "🧸"] 
+    }
 ];
-
 let starsEarned = 0;
 // Add these at the top of your puzzle.js
 let currentPuzzleIndex = 0;
@@ -28,35 +70,32 @@ function generatePuzzle() {
     // 1. Pick a random category set
     const set = puzzleSets[Math.floor(Math.random() * puzzleSets.length)];
     
-    // 2. Shuffle the items in that category so we can pick 3 different ones
+    // 2. Pick 3 different items from the category
     let categoryItems = [...set.items];
     categoryItems.sort(() => Math.random() - 0.5);
-
-    // 3. Take the first 3 unique items from the category
     let item1 = categoryItems[0];
     let item2 = categoryItems[1];
     let item3 = categoryItems[2];
-    let oddEmoji = set.odd;
 
-    // 4. Create the list of 4 items for the grid
+    // 3. Pick ONE random odd emoji from the options list
+    let oddEmoji = set.oddOptions[Math.floor(Math.random() * set.oddOptions.length)];
+
+    // 4. Create and shuffle the 4 items
     let displayItems = [
         { emoji: item1, isOdd: false },
         { emoji: item2, isOdd: false },
         { emoji: item3, isOdd: false },
         { emoji: oddEmoji, isOdd: true }
     ];
-
-    // 5. Shuffle the 4 items so the odd one isn't always in the same spot
     displayItems.sort(() => Math.random() - 0.5);
 
-    // 6. Create the buttons
+    // 5. Create the buttons
     displayItems.forEach(item => {
         const btn = document.createElement("button");
         btn.className = "letter-piece"; 
         btn.style.fontSize = "80px";
         btn.style.padding = "20px";
         btn.innerText = item.emoji;
-        
         btn.onclick = () => checkAnswer(item.isOdd, btn);
         grid.appendChild(btn);
     });
